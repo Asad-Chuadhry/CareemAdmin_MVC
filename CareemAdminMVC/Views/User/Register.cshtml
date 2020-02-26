@@ -1,0 +1,71 @@
+﻿@model CareemAdminMVC.User
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <h2>Create New Admin</h2>
+@using (Html.BeginForm("Register","User",FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.UserID)
+    @if (ViewBag.Message != null)
+    {
+        <div style="border:solid 1px green">
+            @ViewBag.Message
+        </div>
+    }
+
+    <div class="form-group row">
+        @Html.LabelFor(model => model.FullName, new { @class = "col-sm-2 col-form-label" })
+        <div class="col-md-4">
+            @Html.TextBoxFor(model => model.FullName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(model => model.EmailID, new { @class = "col-sm-2 col-form-label" })
+        <div class="col-md-4">
+            @Html.TextBoxFor(model => model.EmailID, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.EmailID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(model => model.Username, new { @class = "col-sm-2 col-form-label" })
+        <div class="col-md-4">
+            @Html.TextBoxFor(model => model.Username, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(model => model.Password, new { @class = "col-sm-2 col-form-label" })
+        <div class="col-md-4">
+            @Html.TextBoxFor(model => model.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(model => model.ConfirmPassword, new { @class = "col-sm-2 col-form-label" })
+        <div class="col-md-4">
+            @Html.TextBoxFor(model => model.ConfirmPassword, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <p>
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </p>
+</div>
+    }
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

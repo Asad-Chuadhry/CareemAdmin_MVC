@@ -1,0 +1,34 @@
+﻿@model CareemAdminMVC.Models.Customer
+
+@{
+    ViewBag.Title = "City";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+    <div class="col-lg-6">
+        <h2>Earning per City</h2>
+        <div class="au-card au-card--bg-blue au-card-top-countries m-b-10">
+            <div class="au-card-inner">
+                <div class="table-responsive">
+                    <table class="table table-top-countries">
+                        <tbody>
+
+                            @{int i = 0;
+                                foreach (var city in ViewBag.city)
+                                {
+                                   <tr>
+                                       <td><h4> @city </h4> </td>
+                                       <td><h4> @ViewBag.cityEarning[i++] PKR </h4></td>
+                                   </tr>
+                                }
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>

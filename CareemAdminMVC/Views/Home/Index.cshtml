@@ -1,0 +1,157 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="overview-wrap">
+                    <h2 class="title-1">overview</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row m-t-25">
+            <div class="col-sm-6 col-lg-3">
+                <div class="overview-item overview-item--c1">
+                    <div class="overview__inner">
+                        <div class="overview-box clearfix">
+                            <div class="icon">
+                                <i class="zmdi zmdi-account-o"></i>
+                            </div>
+                            <div class="text">
+                                <h2>@ViewBag.totalCustomer</h2>
+                                <span>Careem users</span>
+                            </div>
+                        </div>
+                        <div class="overview-chart">
+                            <canvas id="widgetChart1"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="overview-item overview-item--c2">
+                    <div class="overview__inner">
+                        <div class="overview-box clearfix">
+                            <div class="icon">
+                                <i class="zmdi zmdi-shopping-cart"></i>
+                            </div>
+                            <div class="text">
+                                <h2>@ViewBag.totalRide</h2>
+                                <span>total rides</span>
+                            </div>
+                        </div>
+                        <div class="overview-chart">
+                            <canvas id="widgetChart2"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="overview-item overview-item--c3">
+                    <div class="overview__inner">
+                        <div class="overview-box clearfix">
+                            <div class="icon">
+                                <i class="zmdi zmdi-calendar-note"></i>
+                            </div>
+                            <div class="text">
+                                <h2>@ViewBag.totalDriver</h2>
+                                <span>Drivers</span>
+                            </div>
+                        </div>
+                        <div class="overview-chart">
+                            <canvas id="widgetChart3"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="overview-item overview-item--c4">
+                    <div class="overview__inner">
+                        <div class="overview-box clearfix">
+                            <div class="icon">
+                                <i class="zmdi zmdi-money"></i>
+                            </div>
+                            <div class="text">
+                                <h2>@ViewBag.totalEarning PKR</h2>
+                                <span>Total Earnings</span>
+                            </div>
+                        </div>
+                        <div class="overview-chart">
+                            <canvas id="widgetChart4"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-9">
+                <h2 class="title-1 m-b-25">Customers</h2>
+                <div class="table-responsive table--no-card m-b-40">
+                    <table class="table table-borderless table-striped table-earning">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Phone Number</th>
+                                <th>Rides</th>
+                                <th>City</th>
+                                <th>Payments</th>
+                                <th>Join Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ int i = 1;
+                                foreach (var c in ViewBag.customer10)
+                                {
+                                  if (i > 10) { break; }
+                                <tr>
+                                    <td>@c.name</td>
+                                    <td>@c.phoneNo</td>
+                                    <td>@c.rides</td>
+                                    <td>@c.city</td>
+                                    <td>@c.payment</td>
+                                    <td>@c.date</td>
+
+                                </tr>
+                                    i++;
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <h2 class="title-1 m-b-25">Cities</h2>
+                <div class="au-card au-card--bg-blue au-card-top-countries m-b-40">
+                    <div class="au-card-inner">
+                        <div class="table-responsive">
+                            <table class="table table-top-countries">
+                                <tbody>
+
+                                    @{int z = 0;
+                                        foreach (var city in ViewBag.fCity)
+                                        {
+                                            if (z > 5) { break; }
+                                            <tr>
+                                                <td> @city </td>
+                                            </tr>
+                                            z++;
+                                        }
+                                    }
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="copyright">
+                    <p>Copyright © 2020 CareemAdmin. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,156 @@
+﻿@model CareemAdminMVC.Models.Driver
+
+@{
+    ViewBag.Title = "Driver";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (ViewBag.message == "")
+{
+    <script>
+          window.onload = function WindowLoad(event) {
+              $("#formDiv").hide();
+          }
+    </script>
+}
+<script>
+    function addDriver() {
+        $("#formDiv").show();
+    }
+    function addDriverDone() {
+        $("#formDiv").hide();
+    }
+</script>
+<div id="formDiv" class="card">
+    <button onclick="addDriverDone()" class="btn btn-primary ">Show Driver List</button>
+    <div class="card-body">
+        <span style="color:red; font-size:medium">  @ViewBag.message </span>
+        @using (Html.BeginForm("Store", "Home", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>Enter Driver Detial</h4>
+                <hr />
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(m => m.name, new { @class = "form-control", @placeholder = " Name" })
+                        @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Status</label>
+                    <div class="col-md-3">
+
+                        @Html.TextBoxFor(m => m.status, new { @class = "form-control", @placeholder = "block/active" })
+                        @Html.ValidationMessageFor(model => model.status ,"", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Lincense Number</label>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(m => m.licenseNo, new { @class = "form-control", @placeholder = " Lincense Number" })
+                        @Html.ValidationMessageFor(model => model.licenseNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">City</label>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(m => m.city, new { @class = "form-control", @placeholder = "city" })
+                        @Html.ValidationMessageFor(model => model.city, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(m => m.email, new { @class = "form-control", @placeholder = "example@asad.com" })
+                        @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Vichle Number</label>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(m => m.vichleNo, new { @class = "form-control", @placeholder = "Vichle Number" })
+                        @Html.ValidationMessageFor(model => model.vichleNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                @{
+                    ViewBag.message = "lol";
+                }
+                <div form-group row>
+                    <input type="submit" name="submit" value="Submit" class="btn btn-success" />
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div>
+    <div class="row justify-content-center">
+        <div class="col-md-auto">
+            <div class="card">
+                <div class="card-body">
+                    <div class="overview-wrap">
+                        <h2 class="title-1"> Drivers </h2>
+                        <button type="button" class="btn btn-primary" onclick="addDriver()">
+                            <i class="zmdi zmdi-plus"></i> add Driver
+                        </button>
+                    </div>
+                    <table class="table-responsive table--no-card m-b-50 container-fluid table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>License Number</th>
+                                <th>Vichle Number</th>
+                                <th>Email</th>
+                                <th>City</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int i = 1;
+                            }
+                            @foreach (var driver in ViewBag.drivers)
+                            {
+
+                                <tr>
+                                    <td>@driver.name</td>
+                                    <td>
+                                        @{
+                                            if (driver.status == "block")
+                                            {
+                                                <span class="badge badge-danger">Block</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge badge-warning">Active</span>
+                                            }
+                                        }
+                                    </td>
+                                    <td>@driver.licenseNo</td>
+                                    <td>@driver.vichleNo</td>
+                                    <td>@driver.email</td>
+                                    <td>@driver.city</td>
+
+                                    <td><a href="@Url.Action("EditDriver","Home",new {id=driver.id})" class="btn btn-success"><div><span class="fa fa-pencil"></span></div></a></td>
+                                    <td><a href="@Url.Action("Delete","Home",new {id=driver.id})" class="btn btn-success"><div><span class="fa fa-trash-o"></span></div></a></td>
+
+                                </tr>
+                                i++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

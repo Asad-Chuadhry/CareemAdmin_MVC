@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+        <header class="header-mobile d-block d-lg-none">
+            <div class="header-mobile__bar">
+                <div class="container-fluid">
+                    <div class="header-mobile-inner">
+                        <a class="logo" href="~/Home/Index">
+                            <img src="~/Content/careemAdmin.png" alt="Careem Admin" />
+                        </a>
+                        <button class="hamburger hamburger--slider" type="button">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <nav class="navbar-mobile">
+                <div class="container-fluid">
+                    <ul class="navbar-mobile__list list-unstyled">
+                        <li class="has-sub">
+                            <a class="js-arrow" href="~/Home/Index">
+                                <i class="fas fa-tachometer-alt"></i>Dashboard
+                            </a>
+
+                        </li>
+                        <li>
+                            <a href="~/Home/Customer">
+                                <i class="fas fa-chart-bar"></i>Customer
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/Home/Driver">
+                                <i class="fas fa-table"></i>Driver
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/User/Register">
+                                <i class="far fa-check-square"></i>Add Admin
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="~/Home/City">
+                                <i class="fas fa-map-marker-alt"></i>City
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- END HEADER MOBILE-->
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            <div class="logo">
+                <a href="#">
+                    <img src="~/Content/images/icon/calogo.png" alt="Careem Admin" />
+                </a>
+            </div>
+            <div class="menu-sidebar__content js-scrollbar1">
+                <nav class="navbar-sidebar">
+                    <ul class="list-unstyled navbar__list">
+                        <li>
+                            <a href="~/Home/Index">
+                                <i class="fas fa-tachometer-alt"></i>Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/Home/Customer">
+                                <i class="fas fa-chart-bar"></i>Customers
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/Home/Driver">
+                                <i class="fas fa-chart-bar"></i>Drivers
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="~/User/Register">
+                                <i class="fas fa-table"></i>Add Admin
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/Home/City">
+                                <i class="fas fa-map-marker-alt"></i>City Earning
+                            </a>
+                        </li>
+
+                    </ul>
+
+
+                </nav>
+            </div>
+        </aside>
+        <!-- END MENU SIDEBAR-->
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            <header class="header-desktop">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="header-wrap">
+                            
+                                
+                                @using (@Html.BeginForm("Search","Home",FormMethod.Post,new {@class="form-header" }))
+                                {
+                                    @Html.TextBox("search",null,new {@class="au-input au-input--xl" ,@placeholder="search customer...." }) 
+                                <button data-toggle="modal" data-target="#infoModal" class="au-btn--submit" type="submit">
+                                    <i class="zmdi zmdi-search"></i>
+                                </button>
+                                }
+                                
+                            
+                            <div class="header-button">
+
+                                <div class="account-wrap">
+                                    <div class="account-item clearfix js-item-menu">
+                                        <div class="image">
+                                            <img alt="Asad" src="~/Content/images/icon/dev.jpg">
+                                        </div>
+                                        <div class="content">
+                                            <a class="js-acc-btn" href="#">
+                                                @if (@HttpContext.Current.Session["LogedUserFullname"] != null)
+                                                {
+                                                    @HttpContext.Current.Session["LogedUserFullname"].ToString();
+                                                }
+                                            </a>
+                                        </div>
+                                        <div class="account-dropdown js-dropdown">
+                                            <div class="info clearfix">
+                                                <div class="image">
+                                                    <a href="#">
+                                                        <img alt="Asad ChuaDhey" src="~/Content/images/icon/dev.jpg">
+                                                    </a>
+                                                </div>
+                                                <div class="content">
+                                                    <h5 class="name">
+                                                        <a href="#">
+                                                            @if (@HttpContext.Current.Session["LogedUserFullname"] != null)
+                                                            {
+                                                                @HttpContext.Current.Session["LogedUserFullname"].ToString();
+                                                            }
+                                                        </a>
+                                                    </h5>
+                                                    <span class="email">
+                                                        @if (@HttpContext.Current.Session["Email"] != null)
+                                                        {
+                                                            @HttpContext.Current.Session["Email"].ToString();
+                                                        }
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="account-dropdown__body">
+                                                <div class="account-dropdown__item">
+                                                    <a href="#">
+                                                        <i class="zmdi zmdi-account"></i>Account
+                                                    </a>
+                                                </div>
+                                                <div class="account-dropdown__footer">
+                                                    <a href="@Url.Action("Logout","User")">
+                                                        <i class="zmdi zmdi-power"></i>Logout
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- HEADER DESKTOP-->
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    @RenderBody()
+                </div>
+            </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+        </div>
+
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
